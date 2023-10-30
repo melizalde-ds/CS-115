@@ -9,7 +9,7 @@
 */
 package DessertShop;
 
-public class Cookie extends DessertItem {
+public class Cookie extends DessertItem implements SameItem{
     private int cookieQty;
     private double pricePerDozen;
 
@@ -56,5 +56,16 @@ public class Cookie extends DessertItem {
         String line2_3 = String.format("[Tax $%4.2f]", calculateTax());
         String outputStr = String.format("%s\n\t%-45s%s%17s", line1, line2_1, line2_2, line2_3);
         return outputStr;
+    }
+
+    @Override
+    public boolean sameItem(Object o) {
+        if (o instanceof Cookie) {
+            Cookie c = (Cookie) o;
+            if (this.getName().equals(c.getName()) && this.getPricePerDozen() == c.getPricePerDozen()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

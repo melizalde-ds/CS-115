@@ -70,4 +70,20 @@ public class CandyTest {
         double tax = c.calculateTax();
         assertEquals(tax, 0.0725, 0.0);
     }
+
+    @Test
+    public void sameCandyTestTrue() {
+        Candy c1 = new Candy("Candy", 1, 1);
+        Candy c2 = new Candy("Candy", 1, 1);
+        boolean same = c1.sameItem(c2);
+        assertEquals(same, true);
+    }
+
+    @Test
+    public void sameCandyTestFalse() {
+        Candy c1 = new Candy("Candy", 1, 1);
+        Candy c2 = new Candy("Candy", 1, 2);
+        boolean same = c1.sameItem(c2);
+        assertEquals(same, false);
+    }
 }

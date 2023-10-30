@@ -5,7 +5,7 @@
 * Instructor's Name: Barbara Chamberlin
 *
 * @author: Nelly Barrera and Miguel Elizalde
-* @since: 09/27/2023
+* @since: 10/21/2023
 */
 package DessertShop;
 
@@ -72,4 +72,27 @@ public class DessertItemTest {
         assertEquals(tax, 0.0725, 0.0);
     }
 
+    @Test
+    public void compareToLessThanTest() {
+        DessertItem d = new Candy("Dessert", 1.00, 1.00);
+        DessertItem d2 = new Candy("Dessert", 2.00, 2.00);
+        int compare = d.compareTo(d2);
+        assertEquals(compare, -1);
+    }
+
+    @Test
+    public void compareToEqualTest() {
+        DessertItem d = new Candy("Dessert", 1.00, 1.00);
+        DessertItem d2 = new Candy("Dessert", 1.00, 1.00);
+        int compare = d.compareTo(d2);
+        assertEquals(compare, 0);
+    }
+
+    @Test
+    public void compareToGreaterThanTest() {
+        DessertItem d = new Candy("Dessert", 2.00, 2.00);
+        DessertItem d2 = new Candy("Dessert", 1.00, 1.00);
+        int compare = d.compareTo(d2);
+        assertEquals(compare, 1);
+    }
 }

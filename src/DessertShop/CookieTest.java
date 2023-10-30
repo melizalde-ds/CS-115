@@ -70,4 +70,18 @@ public class CookieTest {
         double tax = c.calculateTax();
         assertEquals(tax, 0.0725, 0);
     }
+
+    @Test
+    public void sameCookieTestTrue() {
+        Cookie c1 = new Cookie("Cookie", 12, 1);
+        Cookie c2 = new Cookie("Cookie", 12, 1);
+        assertEquals(c1.sameItem(c2), true);
+    }
+
+    @Test
+    public void sameCookieTestFalse() {
+        Cookie c1 = new Cookie("Cookie", 12, 1);
+        Cookie c2 = new Cookie("Cookie", 12, 2);
+        assertEquals(c1.sameItem(c2), false);
+    }  
 }

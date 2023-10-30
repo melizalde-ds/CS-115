@@ -5,17 +5,19 @@
 * Instructor's Name: Barbara Chamberlin
 *
 * @author: Nelly Barrera and Miguel Elizalde
-* @since: 09/27/2023
+* @since: 10/21/2023
 */
 package DessertShop;
 
 import java.util.ArrayList;
 
-public class Order {
+public class Order implements Payable {
     private ArrayList<DessertItem> order;
+    private PayType payMethod;
 
     public Order() {
         this.order = new ArrayList<DessertItem>();
+        this.payMethod = PayType.CASH;
     }
 
     public ArrayList<DessertItem> getOrderList() {
@@ -23,7 +25,38 @@ public class Order {
     }
 
     public void add(DessertItem dessert) {
-        order.add(dessert);
+        int flag = 0;
+        if (dessert instanceof Candy) {
+            Candy c = (Candy) dessert;
+            for (int i = 0; i < order.size(); i++) {
+                if (order.get(i) instanceof Candy) {
+                    Candy candyItem = (Candy) order.get(i);
+                    if (candyItem.sameItem(c)) {
+                        candyItem.setCandyWeight(candyItem.getCandyWeight() + c.getCandyWeight());
+                        flag = 1;
+                        break;
+                    }
+                }
+            }
+        }
+        if (dessert instanceof Cookie) {
+            Cookie c = (Cookie) dessert;
+            for (int i = 0; i < order.size(); i++) {
+                if (order.get(i) instanceof Cookie) {
+                    Cookie cookieItem = (Cookie) order.get(i);
+                    if (cookieItem.sameItem(c)) {
+                        cookieItem.setCookieQty(cookieItem.getCookieQty() + c.getCookieQty());
+                        flag = 1;
+                        break;
+                    }
+                }
+            }
+            
+        }
+        if (flag == 0) {
+            order.add(dessert);
+        }
+
     }
 
     public int itemCount() {
@@ -40,10 +73,20 @@ public class Order {
 
     public double orderTax() {
         double totalTax = 0;
-        for(DessertItem dessert : order) {
+        for (DessertItem dessert : order) {
             totalTax += dessert.calculateTax();
         }
         return totalTax;
+    }
+
+    @Override
+    public PayType getPayType() {
+        return payMethod;
+    }
+
+    @Override
+    public void setPayType(PayType payType) {
+        this.payMethod = payType;
     }
 
     @Override
@@ -60,7 +103,9 @@ public class Order {
         String line2_3 = String.format("[Tax $%4.2f]", orderTax());
         String line3_1 = "Order Total: ";
         String line3_2 = String.format("$%4.2f", orderCost() + orderTax());
-        outputStr += String.format("%s\n%-53s%s%17s\n%-53s%s", line1, line2_1, line2_2, line2_3, line3_1, line3_2);
+        String line4 = "Paid for with " + getPayType();
+        outputStr += String.format("%s\n%-53s%s%17s\n%-53s%s\n%s", line1, line2_1, line2_2, line2_3, line3_1, line3_2,
+                line4);
         return outputStr;
     }
 }
