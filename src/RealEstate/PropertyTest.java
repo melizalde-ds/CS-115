@@ -21,7 +21,7 @@ public class PropertyTest {
 
     @Test
     public void getStreetAddressFull() {
-        Condo c = new Condo("123 Main St", "12345", 3, 2, 2, 1);
+        Condo c = new Condo("123 Main St", 12345, 3, 2, 2, 1);
         assertEquals("123 Main St", c.getStreetAddress());
     }
     
@@ -35,19 +35,19 @@ public class PropertyTest {
     @Test
     public void getZipNull() {
         Condo c = new Condo();
-        assertEquals("", c.getZip());
+        assertEquals(0, c.getZip());
     }
 
     @Test
     public void getZipFull() {
-        Condo c = new Condo("123 Main St", "12345", 3, 2, 2, 1);
-        assertEquals("12345", c.getZip());
+        Condo c = new Condo("123 Main St", 12345, 3, 2, 2, 1);
+        assertEquals(12345, c.getZip());
     }
 
     @Test
     public void setZip() {
         Condo c = new Condo();
-        c.setZip("12345");
-        assertEquals("12345", c.getZip());
+        c.setZip(12345);
+        assertEquals(12345, c.getZip());
     }
 }

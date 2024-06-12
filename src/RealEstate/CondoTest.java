@@ -21,7 +21,7 @@ public class CondoTest {
 
     @Test
     public void getFloorNumberFull() {
-        Condo c = new Condo("123 Main St", "12345", 2, 2, 1500.0, 2);
+        Condo c = new Condo("123 Main St", 12345, 2, 2, 1500.0, 2);
         assertEquals(2, c.getFloorLvl());
     }
 
@@ -34,7 +34,7 @@ public class CondoTest {
 
     @Test
     public void calculateAppraisalPrice() {
-        Condo c = new Condo("123 Main St", "12345", 2, 2, 1500.0, 2);
+        Condo c = new Condo("123 Main St", 12345, 2, 2, 1500.0, 2);
         c.calculateAppraisalPrice();
         assertEquals(178000, c.getAppraisalPrice(), 0.0);
     }

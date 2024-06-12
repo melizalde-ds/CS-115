@@ -1,0 +1,77 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "DrawShapes",
+            "request": "launch",
+            "mainClass": "Draw.DrawShapes",
+            "projectName": "CS-115_275a901a"
+        },
+        {
+            "type": "java",
+            "name": "DrawShapes",
+            "request": "launch",
+            "mainClass": "DrawTreeBaseline.DrawShapes",
+            "projectName": "CS-115_275a901a"
+        },
+        {
+            "type": "java",
+            "name": "DrawShapes",
+            "request": "launch",
+            "mainClass": "DrawBaseLine.DrawShapes",
+            "projectName": "CS-115_275a901a"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "PlayBlackJack",
+            "request": "launch",
+            "mainClass": "BlackJackTest.PlayBlackJack",
+            "projectName": "CS-115_275a901a"
+        },
+        {
+            "type": "java",
+            "name": "DessertShop",
+            "request": "launch",
+            "mainClass": "DessertShop.DessertShop",
+            "projectName": "CS-115_275a901a"
+        },
+        {
+            "type": "java",
+            "name": "REO",
+            "request": "launch",
+            "mainClass": "RealEstate.REO",
+            "projectName": "CS-115_275a901a"
+        },
+        {
+            "type": "java",
+            "name": "Planner",
+            "request": "launch",
+            "mainClass": "ToDoLists.Planner",
+            "projectName": "CS-115_275a901a"
+        },
+        {
+            "type": "java",
+            "name": "Lab1a",
+            "request": "launch",
+            "mainClass": "Week1.Lab1a",
+            "projectName": "CS-115_275a901a"
+        },
+        {
+            "type": "java",
+            "name": "MagelightUniversity",
+            "request": "launch",
+            "mainClass": "Week2.MagelightUniversity",
+            "projectName": "CS-115_275a901a"
+        }
+    ]
+}

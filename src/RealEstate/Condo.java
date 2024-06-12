@@ -17,7 +17,7 @@ public class Condo extends Residential {
         this.floorLvl = 0;
     }
 
-    public Condo(String streetAddress, String zip, int bedCount, int bathCount, double squareFootage, int floorLvl) {
+    public Condo(String streetAddress, int zip, int bedCount, int bathCount, double squareFootage, int floorLvl) {
         super(streetAddress, zip, bedCount, bathCount, squareFootage);
         this.floorLvl = floorLvl;
     }
@@ -33,5 +33,24 @@ public class Condo extends Residential {
     @Override
     public void calculateAppraisalPrice() {
         this.setAppraisalPrice((getSquareFootage()*88)+(getBedCount()*8000)+(getBathCount()*10000)+((getFloorLvl()-1)*10000));
+    }
+
+    @Override
+    public String toString() {
+        String s = "----------------------------------------------------------------------------------\n";
+        String line1_1 = "Residence Type: Condo";
+        String line1_2 = "Address: " + getStreetAddress();
+        String line1_3 = "Zip Code: " + getZip();
+        s += String.format("%-30s %-30s %s\n", line1_1, line1_2, line1_3);
+        s += "----------------------------------------------------------------------------------\n";
+        s += String.format("%s %d\n", "Bedrooms:", getBedCount());
+        s += String.format("%s %d\n", "Bathrooms:", getBathCount());
+        s += String.format("%s %.2f ft2\n", "Sq Footage:", getSquareFootage());
+        s += String.format("%s %d\n", "Floor:", getFloorLvl());
+        s += "----------------------------------------------------------------------------------\n";
+        s += String.format("%s $%,.2f\n", "Appraisal Price:", getAppraisalPrice());
+        s += String.format("%s $%,.2f\n", "Listing Price:", getListPrice());
+        s += "----------------------------------------------------------------------------------\n";
+        return s;
     }
 }

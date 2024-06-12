@@ -5,14 +5,18 @@
 * Instructor's Name: Barbara Chamberlin
 *
 * @author: Miguel Elizalde
-* @since: 10/14/2023
+* @since: 12/02/2023
 */
 package RealEstate;
 
-public abstract class Residential extends Property {
+import java.util.HashMap;
+import java.util.Set;
+
+public abstract class Residential extends Property implements Biddable{
     private int bedCount;
     private int bathCount;
     private double squareFootage;
+    private HashMap<String, Double> bids = new HashMap<String, Double>();
 
     public Residential() {
         super();
@@ -21,7 +25,7 @@ public abstract class Residential extends Property {
         this.squareFootage = 0.0;
     }
 
-    public Residential(String streetAddress, String zip, int bedCount, int bathCount, double squareFootage) {
+    public Residential(String streetAddress, int zip, int bedCount, int bathCount, double squareFootage) {
         super(streetAddress, zip);
         this.bedCount = bedCount;
         this.bathCount = bathCount;
@@ -53,4 +57,29 @@ public abstract class Residential extends Property {
     }
 
     public abstract void calculateAppraisalPrice();
+
+    @Override
+    public HashMap<String, Double> getBids() {
+        return bids;
+    }
+
+    @Override
+    public Double getBid(String bidId) {
+        return bids.get(bidId);
+    }
+
+    @Override
+    public Set<String> getBidders() {
+        return bids.keySet();
+    }
+
+    @Override
+    public int getBidCount() {
+        return bids.size();
+    }
+
+    @Override
+    public void newBid(String bidder, Double bid) {
+        bids.put(bidder, bid);
+    }
 }

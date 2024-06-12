@@ -21,7 +21,7 @@ public class ResidentialTest {
 
     @Test
     public void getBedCountFull() {
-        House h = new House("123 Main St", "12345", 2, 2, 1500.0, 0.5);
+        House h = new House("123 Main St", 12345, 2, 2, 1500.0, 0.5);
         assertEquals(2, h.getBedCount());
     }
 
@@ -40,7 +40,7 @@ public class ResidentialTest {
 
     @Test
     public void getBathCountFull() {
-        House h = new House("123 Main St", "12345", 2, 2, 1500.0, 0.5);
+        House h = new House("123 Main St", 12345, 2, 2, 1500.0, 0.5);
         assertEquals(2, h.getBathCount());
     }
 
@@ -59,7 +59,7 @@ public class ResidentialTest {
 
     @Test
     public void getSquareFootageFull() {
-        House h = new House("123 Main St", "12345", 2, 2, 1500.0, 0.5);
+        House h = new House("123 Main St", 12345, 2, 2, 1500.0, 0.5);
         assertEquals(1500.0, h.getSquareFootage(), 0.0);
     }
 

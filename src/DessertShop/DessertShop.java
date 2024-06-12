@@ -5,14 +5,18 @@
 * Instructor's Name: Barbara Chamberlin
 *
 * @author: Nelly Barrera and Miguel Elizalde
-* @since: 10/21/2023
+* @since: 11/04/2023
 */
 package DessertShop;
 
 import java.util.Collections;
 import java.util.Scanner;
+import java.util.HashMap;
 
 public class DessertShop {
+    private static HashMap<String, Customer> customerDB = new HashMap<String, Customer>();
+    private static String customerName;
+
     public static void main(String[] args) {
         Order order = new Order();
         String paymentMethod;
@@ -30,12 +34,22 @@ public class DessertShop {
                 System.out.println("2: Cookie");
                 System.out.println("3: Ice Cream");
                 System.out.println("4: Sunday");
+                System.out.println("5: Admin Module");
 
-                System.out.print("\nWhat would you like to add to the order? (1-4, Enter for done): ");
+                System.out.print("\nWhat would you like to add to the order? (1-5, Enter for done): ");
                 choice = sIn.nextLine();
 
                 if (choice.equals("")) {
                     while (!payDone) {
+                        System.out.println("Please enter customer name: ");
+                        customerName = sIn.nextLine();
+                        if (customerDB.containsKey(customerName)) {
+                            customerDB.get(customerName).addToHistory(order);
+                        } else {
+                            Customer customer = new Customer(customerName);
+                            customerDB.put(customer.getName(), customer);
+                            customerDB.get(customerName).addToHistory(order);
+                        }
                         System.out.println("What form of payment would you like to use? (CASH, CARD, PHONE)");
                         paymentMethod = sIn.nextLine();
                         switch (paymentMethod.toUpperCase()) {
@@ -79,8 +93,11 @@ public class DessertShop {
                             order.add(orderItem);
                             System.out.printf("%n%s has been added to your order.%n", orderItem.getName());
                             break;
+                        case "5":
+                            adminModule();
+                            break;
                         default:
-                            System.out.println("Invalid response:  Please enter a choice from the menu (1-4)");
+                            System.out.println("Invalid response:  Please enter a choice from the menu (1-5)");
                             break;
                     }// end of switch (choice)
                 } // end of if (choice.equals(""))
@@ -109,8 +126,13 @@ public class DessertShop {
              */
             Collections.sort(order.getOrderList());
             System.out.println(order);
+            System.out.println("----------------------------------------------------------------------------");
+            String line1 = "Customer Name: " + customerName;
+            String line2 = "Customer ID: " + customerDB.get(customerName).getID();
+            String line3 = "Total Orders: " + customerDB.get(customerName).getOrderHistory().size();
+            System.out.printf("%-29s%-29s%17s\n", line1, line2, line3);
             while (done) {
-                System.out.println("Hit enter to enter a new order");
+                System.out.println("\nHit enter to enter a new order");
                 String enter = sIn.nextLine();
                 if (enter.equals("")) {
                     done = false;
@@ -243,5 +265,64 @@ public class DessertShop {
         } while (toppingPrice <= 0);
         return new Sundae(iceCream.getName(), iceCream.getScoopCount(), iceCream.getPricePerScoop(), toppingName,
                 toppingPrice);
+    }
+
+    private static void adminModule() {
+        Scanner sIn = new Scanner(System.in);
+        boolean done = false;
+        while (!done) {
+            System.out.println("\n1: Shop Customer List");
+            System.out.println("2: Customer Order History");
+            System.out.println("3: Best Customer");
+            System.out.println("4: Exit Admin Module");
+
+            System.out.print("\nWhat would you like to do? (1-4): ");
+            String choice = sIn.next();
+            try {
+                switch (Integer.parseInt(choice)) {
+                    case 1:
+                        String line1 = "Customer Name: ";
+                        String line2 = "Customer ID: ";
+
+                        System.out.println("Customer List: ");
+                        for (String key : customerDB.keySet()) {
+                            System.out.printf("%s%-16s %s%s\n", line1, key, line2, customerDB.get(key).getID());
+                        }
+                        break;
+                    case 2:
+                        System.out.println("Enter the name of the customer: ");
+                        String customerName = sIn.next();
+                        if (customerDB.containsKey(customerName)) {
+                            for (int i = 0; i < customerDB.get(customerName).getOrderHistory().size(); i++) {
+                                System.out.println("Order " + (i + 1) + ":");
+                                System.out.println(customerDB.get(customerName).getOrderHistory().get(i));
+                                System.out.println("\n");
+                            }
+                        } else {
+                            System.out.println("Customer not found.");
+                        }
+                        break;
+                    case 3:
+                        Customer bestCustomer = null;
+                        int bestCustomerOrders = 0;
+                        for (String key : customerDB.keySet()) {
+                            if (customerDB.get(key).getOrderHistory().size() > bestCustomerOrders) {
+                                bestCustomer = customerDB.get(key);
+                                bestCustomerOrders = bestCustomer.getOrderHistory().size();
+                            }
+                        }
+                        System.out.println("The Dessert Shop's most valued customer is: " + bestCustomer.getName());
+                        break;
+                    case 4:
+                        done = true;
+                        break;
+                    default:
+                        System.out.println("Invalid response:  Please enter a choice from the menu (1-4)");
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid response:  Please enter a choice from the menu (1-4)");
+            }
+        }
     }
 }

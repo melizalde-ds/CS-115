@@ -11,16 +11,16 @@ package RealEstate;
 
 public abstract class Property {
     private String streetAddress;
-    private String zip;
+    private int zip;
     private double listPrice = 0;
     private double appraisalPrice = 0;
 
     public Property() {
         this.streetAddress = "";
-        this.zip = "";
+        this.zip = 0;
     }
 
-    public Property(String streetAddress, String zip) {
+    public Property(String streetAddress, int zip) {
         this.streetAddress = streetAddress;
         this.zip = zip;
     }
@@ -33,11 +33,11 @@ public abstract class Property {
         this.streetAddress = streetAddress;
     }
 
-    public String getZip() {
+    public int getZip() {
         return zip;
     }
 
-    public void setZip(String zip) {
+    public void setZip(int zip) {
         this.zip = zip;
     }
 

@@ -20,7 +20,7 @@ public class HouseTest {
 
     @Test
     public void getYardAcresFull() {
-        House h = new House("123 Main St", "12345", 2, 2, 1500.0, 0.5);
+        House h = new House("123 Main St", 12345, 2, 2, 1500.0, 0.5);
         assertEquals(0.5, h.getYardAcres(), 0.0);
     }
 
@@ -33,7 +33,7 @@ public class HouseTest {
 
     @Test
     public void calculateAppraisalPrice() {
-        House h = new House("123 Main St", "12345", 2, 2, 1500.0, 0.5);
+        House h = new House("123 Main St", 12345, 2, 2, 1500.0, 0.5);
         h.calculateAppraisalPrice();
         assertEquals(189500, h.getAppraisalPrice(), 0.0);
     }
